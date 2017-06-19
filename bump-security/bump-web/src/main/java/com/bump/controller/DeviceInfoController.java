@@ -27,6 +27,7 @@ import com.bump.utils.R;
 @RestController
 @RequestMapping("/deviceinfo")
 public class DeviceInfoController extends AbstractController {
+	
 	@Autowired
 	private DeviceInfoService deviceInfoService;
 	

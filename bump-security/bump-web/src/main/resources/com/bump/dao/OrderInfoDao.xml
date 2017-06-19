@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bump.dao.OrderInfoDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.bump.entity.OrderInfoEntity" id="orderInfoMap">
+        <result property="orderId" column="order_id"/>
+        <result property="orderNum" column="order_num"/>
+        <result property="exchangeModel" column="exchange_model"/>
+        <result property="sysOrgId" column="sys_org_id"/>
+        <result property="detectOrgId" column="detect_org_id"/>
+        <result property="orderName" column="order_name"/>
+        <result property="orderType" column="order_type"/>
+        <result property="contactPerson1" column="contact_person1"/>
+        <result property="contactPhone1" column="contact_phone1"/>
+        <result property="contactPerson2" column="contact_Person2"/>
+        <result property="contactPhone2" column="contact_phone2"/>
+        <result property="invoiceType" column="invoice_type"/>
+        <result property="invoiceTitle" column="invoice_title"/>
+        <result property="invoiceDetail" column="invoice_detail"/>
+        <result property="timeLimit" column="time_limit"/>
+        <result property="shouldAmount" column="should_amount"/>
+        <result property="realAmount" column="real_amount"/>
+        <result property="status" column="status"/>
+        <result property="remark" column="remark"/>
+        <result property="receiveAddress" column="receive_address"/>
+        <result property="shippingMethods" column="shipping_methods"/>
+        <result property="expressNumber" column="express_number"/>
+        <result property="returnAddress" column="return_address"/>
+        <result property="userId" column="user_id"/>
+        <result property="exchangeType" column="exchange_type"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.bump.entity.OrderInfoEntity">
+		select * from order_info where order_id = #{value}
+	</select>
+
+	<select id="findPageList" resultType="com.bump.entity.OrderInfoEntity">
+		select * from order_info
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by order_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from order_info 
+	</select>
+	 
+	<insert id="save" parameterType="com.bump.entity.OrderInfoEntity" useGeneratedKeys="true" keyProperty="orderId">
+		insert into order_info
+		(
+			`order_num`, 
+			`exchange_model`, 
+			`sys_org_id`, 
+			`detect_org_id`, 
+			`order_name`, 
+			`order_type`, 
+			`contact_person1`, 
+			`contact_phone1`, 
+			`contact_Person2`, 
+			`contact_phone2`, 
+			`invoice_type`, 
+			`invoice_title`, 
+			`invoice_detail`, 
+			`time_limit`, 
+			`should_amount`, 
+			`real_amount`, 
+			`status`, 
+			`remark`, 
+			`receive_address`, 
+			`shipping_methods`, 
+			`express_number`, 
+			`return_address`, 
+			`user_id`, 
+			`exchange_type`,
+			`create_time`
+		)
+		values
+		(
+			#{orderNum}, 
+			#{exchangeModel}, 
+			#{sysOrgId}, 
+			#{detectOrgId}, 
+			#{orderName}, 
+			#{orderType}, 
+			#{contactPerson1}, 
+			#{contactPhone1}, 
+			#{contactPerson2}, 
+			#{contactPhone2}, 
+			#{invoiceType}, 
+			#{invoiceTitle}, 
+			#{invoiceDetail}, 
+			#{timeLimit}, 
+			#{shouldAmount}, 
+			#{realAmount}, 
+			#{status}, 
+			#{remark}, 
+			#{receiveAddress}, 
+			#{shippingMethods}, 
+			#{expressNumber}, 
+			#{returnAddress}, 
+			#{userId}, 
+			#{exchangeType},
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bump.entity.OrderInfoEntity">
+		update order_info 
+		<set>
+			<if test="exchangeModel != null">`exchange_model` = #{exchangeModel}, </if>
+			<if test="sysOrgId != null">`sys_org_id` = #{sysOrgId}, </if>
+			<if test="detectOrgId != null">`detect_org_id` = #{detectOrgId}, </if>
+			<if test="orderName != null">`order_name` = #{orderName}, </if>
+			<if test="orderType != null">`order_type` = #{orderType}, </if>
+			<if test="contactPerson1 != null">`contact_person1` = #{contactPerson1}, </if>
+			<if test="contactPhone1 != null">`contact_phone1` = #{contactPhone1}, </if>
+			<if test="contactPerson2 != null">`contact_Person2` = #{contactPerson2}, </if>
+			<if test="contactPhone2 != null">`contact_phone2` = #{contactPhone2}, </if>
+			<if test="invoiceType != null">`invoice_type` = #{invoiceType}, </if>
+			<if test="invoiceTitle != null">`invoice_title` = #{invoiceTitle}, </if>
+			<if test="invoiceDetail != null">`invoice_detail` = #{invoiceDetail}, </if>
+			<if test="timeLimit != null">`time_limit` = #{timeLimit}, </if>
+			<if test="shouldAmount != null">`should_amount` = #{shouldAmount}, </if>
+			<if test="realAmount != null">`real_amount` = #{realAmount}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="receiveAddress != null">`receive_address` = #{receiveAddress}, </if>
+			<if test="shippingMethods != null">`shipping_methods` = #{shippingMethods}, </if>
+			<if test="expressNumber != null">`express_number` = #{expressNumber}, </if>
+			<if test="returnAddress != null">`return_address` = #{returnAddress}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="exchangeType != null">`exchange_type` = #{exchangeType}</if>
+		</set>
+		where order_id = #{orderId}
+	</update>
+	
+	<delete id="delete">
+		delete from order_info where order_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from order_info where order_id in 
+		<foreach item="orderId" collection="array" open="(" separator="," close=")">
+			#{orderId}
+		</foreach>
+	</delete>
+
+</mapper>

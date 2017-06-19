@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bump.dao.SysOrgDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.bump.entity.SysOrgEntity" id="sysOrgMap">
+        <result property="sysOrgId" column="sys_org_id"/>
+        <result property="sysOrgName" column="sys_org_name"/>
+        <result property="parentOrgId" column="parent_org_id"/>
+        <result property="contactMan" column="contact_man"/>
+        <result property="contactPhone" column="contact_phone"/>
+        <result property="mail" column="mail"/>
+        <result property="sociaCreditCode" column="socia_credit_code"/>
+        <result property="helpPhone" column="help_phone"/>
+        <result property="address" column="address"/>
+        <result property="bank" column="bank"/>
+        <result property="bankAccount" column="bank_account"/>
+        <result property="sysLogo" column="sys_logo"/>
+        <result property="sort" column="sort"/>
+        <result property="orgType" column="org_type"/>
+        <result property="fax" column="fax"/>
+        <result property="servicePromise" column="service_promise"/>
+        <result property="latitudeLongitude" column="latitude_longitude"/>
+        <result property="license" column="license"/>
+        <result property="qualifications" column="qualifications"/>
+        <result property="detectionCycle" column="detection_cycle"/>
+        <result property="isTrusteeship" column="is_trusteeship"/>
+        <result property="userId" column="user_id"/>
+        <result property="isCheck" column="is_check"/>
+        <result property="trade" column="trade"/>
+        <result property="helpMan" column="help_man"/>
+        <result property="postAddrCountry" column="post_addr_country"/>
+        <result property="postAddrArea" column="post_addr_area"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.bump.entity.SysOrgEntity">
+		select * from sys_org where sys_org_id = #{value}
+	</select>
+
+	<select id="findPageList" resultType="com.bump.entity.SysOrgEntity">
+		select * from sys_org where 1=1 
+		<if test="key != null and key.trim() != ''">
+			and sys_org_name like CONCAT('%', #{key}, '%') 
+		</if>
+		<if test="org_type != null and org_type.trim() != ''">
+			and org_type = #{org_type} 
+		</if>
+        <choose>
+            
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by sys_org_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from sys_org 
+	</select>
+	 
+	<insert id="save" parameterType="com.bump.entity.SysOrgEntity" useGeneratedKeys="true" keyProperty="sysOrgId">
+		insert into sys_org
+		(
+			`sys_org_name`, 
+			`parent_org_id`, 
+			`contact_man`, 
+			`contact_phone`, 
+			`mail`, 
+			`socia_credit_code`, 
+			`help_phone`, 
+			`address`, 
+			`bank`, 
+			`bank_account`, 
+			`sys_logo`, 
+			`sort`, 
+			`org_type`, 
+			`fax`, 
+			`service_promise`, 
+			`latitude_longitude`, 
+			`license`, 
+			`qualifications`, 
+			`detection_cycle`, 
+			`is_trusteeship`, 
+			`user_id`, 
+			`is_check`, 
+			`trade`, 
+			`help_man`, 
+			`post_addr_country`, 
+			`post_addr_area`
+		)
+		values
+		(
+			#{sysOrgName}, 
+			#{parentOrgId}, 
+			#{contactMan}, 
+			#{contactPhone}, 
+			#{mail}, 
+			#{sociaCreditCode}, 
+			#{helpPhone}, 
+			#{address}, 
+			#{bank}, 
+			#{bankAccount}, 
+			#{sysLogo}, 
+			#{sort}, 
+			#{orgType}, 
+			#{fax}, 
+			#{servicePromise}, 
+			#{latitudeLongitude}, 
+			#{license}, 
+			#{qualifications}, 
+			#{detectionCycle}, 
+			#{isTrusteeship}, 
+			#{userId}, 
+			#{isCheck}, 
+			#{trade}, 
+			#{helpMan}, 
+			#{postAddrCountry}, 
+			#{postAddrArea}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bump.entity.SysOrgEntity">
+		update sys_org 
+		<set>
+			<if test="sysOrgName != null">`sys_org_name` = #{sysOrgName}, </if>
+			<if test="parentOrgId != null">`parent_org_id` = #{parentOrgId}, </if>
+			<if test="contactMan != null">`contact_man` = #{contactMan}, </if>
+			<if test="contactPhone != null">`contact_phone` = #{contactPhone}, </if>
+			<if test="mail != null">`mail` = #{mail}, </if>
+			<if test="sociaCreditCode != null">`socia_credit_code` = #{sociaCreditCode}, </if>
+			<if test="helpPhone != null">`help_phone` = #{helpPhone}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="bank != null">`bank` = #{bank}, </if>
+			<if test="bankAccount != null">`bank_account` = #{bankAccount}, </if>
+			<if test="sysLogo != null">`sys_logo` = #{sysLogo}, </if>
+			<if test="sort != null">`sort` = #{sort}, </if>
+			<if test="orgType != null">`org_type` = #{orgType}, </if>
+			<if test="fax != null">`fax` = #{fax}, </if>
+			<if test="servicePromise != null">`service_promise` = #{servicePromise}, </if>
+			<if test="latitudeLongitude != null">`latitude_longitude` = #{latitudeLongitude}, </if>
+			<if test="license != null">`license` = #{license}, </if>
+			<if test="qualifications != null">`qualifications` = #{qualifications}, </if>
+			<if test="detectionCycle != null">`detection_cycle` = #{detectionCycle}, </if>
+			<if test="isTrusteeship != null">`is_trusteeship` = #{isTrusteeship}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="isCheck != null">`is_check` = #{isCheck}, </if>
+			<if test="trade != null">`trade` = #{trade}, </if>
+			<if test="helpMan != null">`help_man` = #{helpMan}, </if>
+			<if test="postAddrCountry != null">`post_addr_country` = #{postAddrCountry}, </if>
+			<if test="postAddrArea != null">`post_addr_area` = #{postAddrArea}</if>
+		</set>
+		where sys_org_id = #{sysOrgId}
+	</update>
+	
+	<delete id="delete">
+		delete from sys_org where sys_org_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from sys_org where sys_org_id in 
+		<foreach item="sysOrgId" collection="array" open="(" separator="," close=")">
+			#{sysOrgId}
+		</foreach>
+	</delete>
+
+</mapper>

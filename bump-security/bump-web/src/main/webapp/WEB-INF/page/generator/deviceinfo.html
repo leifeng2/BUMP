@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>计量器具管理</title>
+#parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+		<div class="grid-btn">
+			#if($shiro.hasPermission("deviceinfo:save"))
+			<a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+			#end
+			#if($shiro.hasPermission("deviceinfo:update"))
+			<a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			#end
+			#if($shiro.hasPermission("deviceinfo:delete"))
+			<a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+			#end
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+    
+    <div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+											<div class="form-group">
+			   	<div class="col-sm-2 control-label">录入人员（参见用户表）</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.userId" placeholder="录入人员（参见用户表）"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">机构ID（参见机构ID）</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.sysOrgId" placeholder="机构ID（参见机构ID）"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">编号</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.deviceNum" placeholder="编号"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">设备名称</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.deviceName" placeholder="设备名称"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">设备型号</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.deviceType" placeholder="设备型号"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">检测方式</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.detectMethod" placeholder="检测方式"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">生产厂家</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.manuFacturer" placeholder="生产厂家"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">生产日期</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.productionDate" placeholder="生产日期"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">规格</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.standard" placeholder="规格"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">测量范围</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.measureRange" placeholder="测量范围"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">最大误差</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.maxError" placeholder="最大误差"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">类别</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.category" placeholder="类别"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">专业（参见数据字典）</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.major" placeholder="专业（参见数据字典）"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">服务类型（参见数据字典）</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.serviceType" placeholder="服务类型（参见数据字典）"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">安装/使用地点</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.useLocation" placeholder="安装/使用地点"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">检测周期</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.detectCycle" placeholder="检测周期"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">最近一次检测日期</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.lastDetectDate" placeholder="最近一次检测日期"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">最近一次检测证书</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.lastCertificateUrl" placeholder="最近一次检测证书"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">图片地址</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.imageUrl" placeholder="图片地址"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">使用状态（参见数据字典）</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.useState" placeholder="使用状态（参见数据字典）"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">状态标识（参见数据字典）</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.status" placeholder="状态标识（参见数据字典）"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">备注</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.remark" placeholder="备注"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">管理部门（前台可搜索选择）</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.department" placeholder="管理部门（前台可搜索选择）"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">设备二维码</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="deviceInfo.deviceQrCode" placeholder="设备二维码"/>
+			    </div>
+			</div>
+							<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="${rc.contextPath}/js/generator/deviceinfo.js?_${date.systemTime}"></script>
+</body>
+</html>

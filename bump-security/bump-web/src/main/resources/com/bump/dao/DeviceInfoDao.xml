@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bump.dao.DeviceInfoDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.bump.entity.DeviceInfoEntity" id="deviceInfoMap">
+        <result property="deviceId" column="device_id"/>
+        <result property="userId" column="user_Id"/>
+        <result property="sysOrgId" column="sys_org_id"/>
+        <result property="deviceNum" column="device_num"/>
+        <result property="deviceName" column="device_name"/>
+        <result property="deviceType" column="device_type"/>
+        <result property="detectMethod" column="detect_method"/>
+        <result property="manuFacturer" column="manu_facturer"/>
+        <result property="productionDate" column="production_date"/>
+        <result property="standard" column="standard"/>
+        <result property="measureRange" column="measure_range"/>
+        <result property="maxError" column="max_error"/>
+        <result property="category" column="category"/>
+        <result property="major" column="major"/>
+        <result property="serviceType" column="service_type"/>
+        <result property="useLocation" column="use_location"/>
+        <result property="detectCycle" column="detect_cycle"/>
+        <result property="lastDetectDate" column="last_detect_date"/>
+        <result property="lastCertificateUrl" column="last_certificate_url"/>
+        <result property="imageUrl" column="image_url"/>
+        <result property="useState" column="use_state"/>
+        <result property="status" column="status"/>
+        <result property="remark" column="remark"/>
+        <result property="department" column="department"/>
+        <result property="deviceQrCode" column="device_qr_code"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.bump.entity.DeviceInfoEntity">
+		select * from device_info where device_id = #{value}
+	</select>
+
+	<select id="findPageList" resultType="com.bump.entity.DeviceInfoEntity">
+		select * from device_info
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by device_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from device_info 
+	</select>
+	 
+	<insert id="save" parameterType="com.bump.entity.DeviceInfoEntity" useGeneratedKeys="true" keyProperty="deviceId">
+		insert into device_info
+		(
+			`user_Id`, 
+			`sys_org_id`, 
+			`device_num`, 
+			`device_name`, 
+			`device_type`, 
+			`detect_method`, 
+			`manu_facturer`, 
+			`production_date`, 
+			`standard`, 
+			`measure_range`, 
+			`max_error`, 
+			`category`, 
+			`major`, 
+			`service_type`, 
+			`use_location`, 
+			`detect_cycle`, 
+			`last_detect_date`, 
+			`last_certificate_url`, 
+			`image_url`, 
+			`use_state`, 
+			`status`, 
+			`remark`, 
+			`department`, 
+			`device_qr_code`
+		)
+		values
+		(
+			#{userId}, 
+			#{sysOrgId}, 
+			#{deviceNum}, 
+			#{deviceName}, 
+			#{deviceType}, 
+			#{detectMethod}, 
+			#{manuFacturer}, 
+			#{productionDate}, 
+			#{standard}, 
+			#{measureRange}, 
+			#{maxError}, 
+			#{category}, 
+			#{major}, 
+			#{serviceType}, 
+			#{useLocation}, 
+			#{detectCycle}, 
+			#{lastDetectDate}, 
+			#{lastCertificateUrl}, 
+			#{imageUrl}, 
+			#{useState}, 
+			#{status}, 
+			#{remark}, 
+			#{department}, 
+			#{deviceQrCode}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bump.entity.DeviceInfoEntity">
+		update device_info 
+		<set>
+			<if test="userId != null">`user_Id` = #{userId}, </if>
+			<if test="sysOrgId != null">`sys_org_id` = #{sysOrgId}, </if>
+			<if test="deviceNum != null">`device_num` = #{deviceNum}, </if>
+			<if test="deviceName != null">`device_name` = #{deviceName}, </if>
+			<if test="deviceType != null">`device_type` = #{deviceType}, </if>
+			<if test="detectMethod != null">`detect_method` = #{detectMethod}, </if>
+			<if test="manuFacturer != null">`manu_facturer` = #{manuFacturer}, </if>
+			<if test="productionDate != null">`production_date` = #{productionDate}, </if>
+			<if test="standard != null">`standard` = #{standard}, </if>
+			<if test="measureRange != null">`measure_range` = #{measureRange}, </if>
+			<if test="maxError != null">`max_error` = #{maxError}, </if>
+			<if test="category != null">`category` = #{category}, </if>
+			<if test="major != null">`major` = #{major}, </if>
+			<if test="serviceType != null">`service_type` = #{serviceType}, </if>
+			<if test="useLocation != null">`use_location` = #{useLocation}, </if>
+			<if test="detectCycle != null">`detect_cycle` = #{detectCycle}, </if>
+			<if test="lastDetectDate != null">`last_detect_date` = #{lastDetectDate}, </if>
+			<if test="lastCertificateUrl != null">`last_certificate_url` = #{lastCertificateUrl}, </if>
+			<if test="imageUrl != null">`image_url` = #{imageUrl}, </if>
+			<if test="useState != null">`use_state` = #{useState}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="department != null">`department` = #{department}, </if>
+			<if test="deviceQrCode != null">`device_qr_code` = #{deviceQrCode}</if>
+		</set>
+		where device_id = #{deviceId}
+	</update>
+	
+	<delete id="delete">
+		delete from device_info where device_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from device_info where device_id in 
+		<foreach item="deviceId" collection="array" open="(" separator="," close=")">
+			#{deviceId}
+		</foreach>
+	</delete>
+
+</mapper>

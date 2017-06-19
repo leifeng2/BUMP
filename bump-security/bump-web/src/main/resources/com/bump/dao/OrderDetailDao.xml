@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bump.dao.OrderDetailDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.bump.entity.OrderDetailEntity" id="orderDetailMap">
+        <result property="detailId" column="detail_id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="deviceId" column="device_id"/>
+        <result property="detectMethod" column="detect_method"/>
+        <result property="sysOrgId" column="sys_org_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="shouldAmount" column="should_amount"/>
+        <result property="realAmount" column="real_amount"/>
+        <result property="orderType" column="order_type"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.bump.entity.OrderDetailEntity">
+		select * from order_detail where detail_id = #{value}
+	</select>
+
+	<select id="findPageList" resultType="com.bump.entity.OrderDetailEntity">
+		select * from order_detail
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by detail_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from order_detail 
+	</select>
+	 
+	<insert id="save" parameterType="com.bump.entity.OrderDetailEntity" useGeneratedKeys="true" keyProperty="detailId">
+		insert into order_detail
+		(
+			`order_id`, 
+			`device_id`, 
+			`detect_method`, 
+			`sys_org_id`, 
+			`user_id`, 
+			`should_amount`, 
+			`real_amount`, 
+			`order_type`
+		)
+		values
+		(
+			#{orderId}, 
+			#{deviceId}, 
+			#{detectMethod}, 
+			#{sysOrgId}, 
+			#{userId}, 
+			#{shouldAmount}, 
+			#{realAmount}, 
+			#{orderType}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bump.entity.OrderDetailEntity">
+		update order_detail 
+		<set>
+			<if test="orderId != null">`order_id` = #{orderId}, </if>
+			<if test="deviceId != null">`device_id` = #{deviceId}, </if>
+			<if test="detectMethod != null">`detect_method` = #{detectMethod}, </if>
+			<if test="sysOrgId != null">`sys_org_id` = #{sysOrgId}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="shouldAmount != null">`should_amount` = #{shouldAmount}, </if>
+			<if test="realAmount != null">`real_amount` = #{realAmount}, </if>
+			<if test="orderType != null">`order_type` = #{orderType}</if>
+		</set>
+		where detail_id = #{detailId}
+	</update>
+	
+	<delete id="delete">
+		delete from order_detail where detail_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from order_detail where detail_id in 
+		<foreach item="detailId" collection="array" open="(" separator="," close=")">
+			#{detailId}
+		</foreach>
+	</delete>
+
+</mapper>

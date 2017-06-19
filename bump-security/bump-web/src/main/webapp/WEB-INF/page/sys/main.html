@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>日常页面</title> #parse("sys/header.html")
+</head>
+<body style="background-color: #f1f1f1; font-family: 微软雅黑;">
+
+	<div style="position: absolute; top: 0px; left: 0; bottom: 10; width: 100%; padding: 5px;">
+
+		<div style="width: 1100px; height: 100%; margin: 0 auto; padding: 10px;">
+			<div style="width: 533px; height: 300px; background-color: White; float: left; padding: 10px;">
+				<blockquote style="border-left: 5px solid #eb5405;">
+					<p style="font-size: 20px;">待检测仪器提醒</p>
+				</blockquote>
+				<div class="progress">
+					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
+						<span class="sr-only">90% 完成（成功）</span>
+					</div>
+				</div>
+				<div class="progress">
+					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+						<span class="sr-only">30% 完成（信息）</span>
+					</div>
+				</div>
+				<div class="progress">
+					<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+						<span class="sr-only">20% 完成（警告）</span>
+					</div>
+				</div>
+				<div class="progress">
+					<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+						<span class="sr-only">10% 完成（危险）</span>
+					</div>
+				</div>
+			</div>
+
+			<div style="width: 532px; height: 300px; background-color: White; float: left; margin-left: 10px; padding: 10px;">
+				<blockquote style="border-left: 5px solid #eb5405;">
+					<p style="font-size: 20px;">订单跟踪</p>
+				</blockquote>
+				<img src="${rc.contextPath}/images/002.png" />
+			</div>
+			<div style="width: 100%; height: 700px; background-color: White; float: left; margin-top: 10px; padding: 10px;">
+				<div class="">
+					<div class="col-lg-6">
+						<div class="input-group">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button">管理部门</button>
+							</span> <input type="text" class="form-control" style="width: 160px;">
+						</div>
+					</div>
+				</div>
+				<br />
+				<div class="">
+					<div class="col-lg-6">
+						<div class="input-group">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button">状态标识</button>
+							</span> <input type="text" class="form-control" style="width: 160px;">
+						</div>
+					</div>
+					<button id="bach_add_device_1" type="button" class="btn btn-info" style="background-color: #49bfff; color: White; float: right; margin-right: 50px;">批量录入</button>
+					<button id="bach_add_device_2" type="button" class="btn btn-info" style="background-color: #49bfff; color: White; float: right; margin-right: 20px;">批量导入</button>
+				</div>
+				<br />
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr style="background-color: #4abfff; color: White">
+
+							<th><input type="checkbox"></th>
+							<th>计量器名称</th>
+							<th>规格/型号</th>
+							<th>出厂编号</th>
+							<th>下一次检测日期</th>
+							<th>检测周期</th>
+							<th>电子证书</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="checkbox" name="devId_checkBox" value="1" checked="true"></td>
+							<td><a onclick="$('#name1').modal('show')">耐震压力表</a></td>
+							<td>【0-10】Mpa</td>
+							<td>10010101</td>
+							<td><a onclick="$('#history').modal('show')">2017-02-2</a></td>
+							<td>XXXXXXX</td>
+							<td><a onclick="$('#card').modal('show')">点击查看</a></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="devId_checkBox" value="3" checked="true"></td>
+							<td><a onclick="$('#name1').modal('show')">耐震压力表</a></td>
+							<td>【0-10】Mpa</td>
+							<td>10010101</td>
+							<td><a onclick="$('#history').modal('show')">2017-02-2</a></td>
+							<td>XXXXXXX</td>
+							<td><a onclick="$('#card').modal('show')">点击查看</a></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td><a onclick="$('#name1').modal('show')">耐震压力表</a></td>
+							<td>【0-10】Mpa</td>
+							<td>10010101</td>
+							<td><a onclick="$('#history').modal('show')">2017-02-2</a></td>
+							<td>XXXXXXX</td>
+							<td><a onclick="$('#card').modal('show')">点击查看</a></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td><a onclick="$('#name1').modal('show')">耐震压力表</a></td>
+							<td>【0-10】Mpa</td>
+							<td>10010101</td>
+							<td><a onclick="$('#history').modal('show')">2017-02-2</a></td>
+							<td>XXXXXXX</td>
+							<td><a onclick="$('#card').modal('show')">点击查看</a></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td><a onclick="$('#name1').modal('show')">耐震压力表</a></td>
+							<td>【0-10】Mpa</td>
+							<td>10010101</td>
+							<td><a onclick="$('#history').modal('show')">2017-02-2</a></td>
+							<td>XXXXXXX</td>
+							<td><a onclick="$('#card').modal('show')">点击查看</a></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td><a onclick="$('#name1').modal('show')">耐震压力表</a></td>
+							<td>【0-10】Mpa</td>
+							<td>10010101</td>
+							<td><a onclick="$('#history').modal('show')">2017-02-2</a></td>
+							<td>XXXXXXX</td>
+							<td><a onclick="$('#card').modal('show')">点击查看</a></td>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td><a onclick="$('#name1').modal('show')">耐震压力表</a></td>
+							<td>【0-10】Mpa</td>
+							<td>10010101</td>
+							<td><a onclick="$('#history').modal('show')">2017-02-2</a></td>
+							<td>XXXXXXX</td>
+							<td><a onclick="$('#card').modal('show')">点击查看</a></td>
+
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td><a onclick="$('#name1').modal('show')">耐震压力表</a></td>
+							<td>【0-10】Mpa</td>
+							<td>10010101</td>
+							<td><a onclick="$('#history').modal('show')">2017-02-2</a></td>
+							<td>XXXXXXX</td>
+							<td><a onclick="$('#card').modal('show')">点击查看</a></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td><a onclick="$('#name1').modal('show')">耐震压力表</a></td>
+							<td>【0-10】Mpa</td>
+							<td>10010101</td>
+							<td><a onclick="$('#history').modal('show')">2017-02-2</a></td>
+							<td>XXXXXXX</td>
+							<td><a onclick="$('#card').modal('show')">点击查看</a></td>
+						</tr>
+						</tr>
+					</tbody>
+				</table>
+				<button type="button" class="btn btn-info" style="background-color: #49bfff; color: White; margin-left: 500px" id="create_order_btn">生成订单</button>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<p style="margin: 0 auto; text-align: center">订单发布成功</p>
+					<table class="table table-bordered">
+						<thead style="background-color: #ccc">
+							<tr>
+								<th colspan="2">订单详情</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><address>
+										<strong>地址：</strong>云南省昆明市官渡区<br> <strong>订单编号：</strong>7897897897897<br> <strong>检测机构：</strong>云南楚创科技有限公司<br> <strong>配送方式：</strong>顺丰快递<br>
+									</address></td>
+								<td>订单状态：下单成功，等待机构确认</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width: 1000px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel">送检信息补充</h4>
+				</div>
+				<div class="modal-body">
+					<div style="width: 900px; height: 500px; margin: 0 auto;">
+						<div style="width: 440px; height: 500px; float: left; padding: 20px;">
+							<div class="form-group">
+								<label for="name">统一社会信用代码</label> <input type="text" class="form-control" placeholder="统一社会信用代码">
+							</div>
+							<div class="form-group">
+								<label for="name">机构名称</label> <input type="text" class="form-control" placeholder="请与组织机构代码保持一致">
+							</div>
+							<div class="form-group">
+								<label for="name">机构联系人</label> <input type="text" class="form-control" placeholder="机构联系人">
+							</div>
+							<div class="form-group">
+								<label for="name">手机号码</label> <input type="text" class="form-control" placeholder="手机号码">
+							</div>
+							<div class="form-group">
+								<label for="name">座机</label> <input type="text" class="form-control" placeholder="座机">
+							</div>
+							<div class="form-group">
+								<label for="name">传真</label> <input type="text" class="form-control" placeholder="传真">
+							</div>
+							<div class="form-group">
+								<label for="inputfile">logo</label> <input type="file" id="inputfile">
+							</div>
+						</div>
+						<div style="width: 450px; height: 600px; float: left; padding: 20px;">
+							<div class="form-group">
+								<label for="name">详细地址</label>
+								<textarea class="form-control" rows="3"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="name">银行账户</label> <input type="text" class="form-control" placeholder="银行账户">
+							</div>
+							<div class="form-group">
+								<label for="name">开户银行</label> <select class="form-control">
+									<option>中国银行</option>
+									<option>农业银行</option>
+								</select>
+								<div class="form-group">
+									<label for="name">服务承诺</label>
+									<textarea class="form-control" rows="3"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary">提交更改</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width: 1000px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title" id="H2">计量器添加</h4>
+				</div>
+				<div class="modal-body">
+					<div style="width: 900px; height: 500px; margin: 0 auto;">
+						<div style="width: 440px; height: 500px; float: left; padding: 20px;">
+							<div class="form-group">
+								<label for="name">计量器名称</label> <input type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="name">计量器型号</label> <input type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="name">生产厂家</label> <input type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="name">生产日期</label> <input type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="name">计量器编号</label> <input type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="name">专业</label> <input type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="inputfile">图片</label> <input type="file" id="File2">
+							</div>
+						</div>
+						<div style="width: 450px; height: 600px; float: left; padding: 20px;">
+							<div class="form-group">
+								<label for="name">服务类型</label> <input type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="name">检测方式</label> <input type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="name">使用状态</label> <input type="text" class="form-control">
+								<div class="form-group">
+									<label for="name">管理部门</label> <input type="text" class="form-control">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary">提交更改</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="name1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="H3">耐震压力表图片预览</h4>
+				</div>
+				<div class="modal-body" style="text-align: center">
+					<img src="${rc.contextPath}/images/004.png" /> <br /> <strong>计量器名称：</strong>耐震压力表<br> <strong>规格/型号：</strong>【0-100】Mpa<br> <strong>出厂编号：</strong>45645646<br> <strong>类型：</strong>压力表<br> <strong>服务类型：</strong>强检<br>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="card" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="H4">耐震压力表证书预览</h4>
+				</div>
+				<div class="modal-body" style="text-align: center">
+					<img src="${rc.contextPath}/images/005.png" /> <br /> <strong>证书编号：</strong>5675675675<br> <strong>检测日期：</strong>2017-5-1<br> <strong>检测机构：</strong>云南省某检测机构<br>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="history" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="H5">历史检测记录</h4>
+				</div>
+				<div class="modal-body" style="text-align: center">
+
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>历史检测/校准时间</th>
+								<th>检测机构</th>
+								<th>检测结果</th>
+								<th>电子证书</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>2017-8-5</td>
+								<td>某某检测机构</td>
+								<td>合格</td>
+								<td>XXXXXXXXX</td>
+							</tr>
+							<tr>
+								<td>2017-8-5</td>
+								<td>某某检测机构</td>
+								<td>合格</td>
+								<td>XXXXXXXXX</td>
+							</tr>
+							<tr>
+								<td>2017-8-5</td>
+								<td>某某检测机构</td>
+								<td>合格</td>
+								<td>XXXXXXXXX</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+
+	<!-- 送检机构信息补充 start-->
+	<form id="giveOrgForm">
+		<div id="giveOrgFormLayer" style="margin: 0 auto; display: none">
+			<div style="width: 420px; float: left; padding: 20px;">
+				<div class="form-group">
+					<label for="name">统一社会信用代码</label> <input type="text" class="form-control" id="sociaCreditCode" name="sociaCreditCode" placeholder="统一社会信用代码">
+				</div>
+				<div class="form-group">
+					<label for="name">企业名称</label> <input type="text" class="form-control" name="sysOrgName" placeholder="企业名称">
+				</div>
+				<div class="form-group">
+					<label for="name">行业</label> <select class="form-control" name="trade" tableName="STANDRAD_DEVICE" columnName="METERAGE">
+						<option value="">-请选择-</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="name">联系人</label> <input type="text" class="form-control" name="contactMan" placeholder="联系人">
+				</div>
+				<div class="form-group">
+					<label for="name">紧急联系人</label> <input type="text" class="form-control" name="helpMan" placeholder="紧急联系人">
+				</div>
+				<div class="form-group">
+					<label for="name">手机号码</label> <input type="text" class="form-control" name="helpPhone" placeholder="手机号码">
+				</div>
+			</div>
+			<div style="width: 420px; float: left; padding: 20px;">
+				<div class="form-group">
+					<label for="name">Logo</label> <input type="text" class="form-control" name="sysLogo" placeholder="Logo">
+				</div>
+				<div class="form-group">
+					<label for="name">通讯地址</label> <input type="text" class="form-control" name="postAddrCountry" placeholder="通讯地址">
+				</div>
+				<div class="form-group">
+					<label for="name">详细地址</label>
+					<textarea class="form-control" placeholder="详细地址" rows="3" name="address"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="name">银行账户</label> <input type="text" class="form-control" name="bankAccount" placeholder="银行账户">
+				</div>
+				<div class="form-group">
+					<label for="name">开户银行</label> <select class="form-control" name="bank" tableName="BANK" columnName="BANK_TYPE" defVal="" defTip="请下拉选择">
+						<option value="">-请选择-</option>
+					</select>
+				</div>
+			</div>
+			<div style="clear: both"></div>
+			<div>
+				<button type="button" class="btn btn-primary btn-lg" id="save_give_org_btn" style="background-color: #49bfff; width: 120px; border: none; height: 40px; margin-left: 360px;">确认</button>
+			</div>
+		</div>
+	</form>
+	<!-- 送检机构信息补充 end-->
+	<!-- 计量器具添加 start -->
+	<form id="deviceInfoForm">
+		<div id="deviceInfoLayer" style="margin: 0 auto; display: none">
+			<div style="width: 420px; float: left; padding: 20px;">
+				<div class="form-group">
+					<label for="name">计量器具名称</label> <input type="text" class="form-control" v-model="deviceInfo.deviceName" name="deviceName" placeholder="计量器具名称" value="耐震压力表" />
+				</div>
+				<div class="form-group">
+					<label for="name">计量器具型号</label> <input type="text" class="form-control" v-model="deviceInfo.deviceType" name="deviceType" placeholder="计量器具型号" value="【10-15】Mpa"/>
+				</div>
+				<div class="form-group">
+					<label for="name">生产厂家</label> <input type="text" class="form-control" v-model="deviceInfo.manuFacturer" name="manuFacturer" placeholder="生产厂家" value="昆仑电器"/>
+				</div>
+				<div class="form-group">
+					<label for="name">生产日期</label> <input type="text" class="form-control" v-model="deviceInfo.productionDate" name="productionDate" placeholder="生产日期" value="2017-04-02"/>
+				</div>
+				<div class="form-group">
+					<label for="name">计量器具编号</label> <input type="text" class="form-control" v-model="deviceInfo.deviceNum" name="deviceNum" placeholder="计量器具编号" value="20020202"/>
+				</div>
+				<div class="form-group">
+					<label for="name">专业</label> <select class="form-control" name="major" tableName="DEVICE_INFO" columnName="MAJOR" defVal="" >
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="name">服务类型</label> <select class="form-control" name="serviceType" tableName="DEVICE_INFO" columnName="SERVICE_TYPE" defVal="T01" >
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="name">检测方式</label> <select class="form-control" name="detectMethod" tableName="DEVICE_INFO" columnName="DETECT_METHOD" defVal="M01" >
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+			</div>
+			<div style="width: 420px; float: left; padding: 20px;">
+				<div class="form-group">
+					<label for="name">状态标识</label> <select class="form-control" name="status" tableName="DEVICE_INFO" columnName="STATUS" defVal="D01" >
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="name">使用状态</label> <select class="form-control" name="userState" tableName="DEVICE_INFO" columnName="USE_STATE" defVal="U0A" >
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="name">安装/使用地点</label> <input type="text" class="form-control" v-model="deviceInfo.useLocation" name="useLocation" placeholder="安装/使用地点" value="昆明西三区海源南路239号" />
+				</div>
+				<div class="form-group">
+					<label for="name">管理部门</label> <input type="text" class="form-control" v-model="deviceInfo.department" name="department" placeholder="管理部门" value="设备维护部" />
+				</div>
+				<div class="form-group">
+					<label for="name">检测周期</label> <input type="text" class="form-control" v-model="deviceInfo.detectCycle" name="detectCycle" placeholder="检测周期" value="12"/>
+				</div>
+				<div class="form-group">
+					<label for="name">最近一次检测日期</label> <input type="text" class="form-control" v-model="deviceInfo.lastDetectDate" name="lastDetectDate" placeholder="最近一次检测日期" value="2017-04-03" />
+				</div>
+				<div class="form-group">
+					<label for="name">最近一次检测证书</label> <input type="text" class="form-control" v-model="deviceInfo.lastCertificateUrl" name="lastCertificateUrl" placeholder="最近一次检测证书" value="2017-04-23" />
+				</div>
+			</div>
+			<div style="clear: both"></div>
+			<div>
+				<button type="button" class="btn btn-primary btn-lg" id="save_deviceInfo_btn" style="background-color: #49bfff; width: 120px; border: none; height: 40px; margin-left: 360px;">确认</button>
+			</div>
+		</div>
+	</form>
+	<!-- 计量器具添加 end -->
+	
+	<!-- 生成订单 start -->
+	<form id="orderInfoForm">
+		<div id="orderInfoLayer" style="margin: 0 auto; display: none">
+			<div style="width: 420px; float: left; padding: 20px;">
+				<div class="form-group">
+					<label for="name">交易模式</label> <select class="form-control" name="exchange_model" tableName="ORDER_DETAIL" columnName="ORDER_TYPE" defVal="1" >
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="name">指派机构名称</label> <select class="form-control" name="detect_org_id">
+						<option value="">--请选择--</option>
+						<option value="1" selected>云南省昆明市英格尔检测机构</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="name">配送方式</label> </label> <select class="form-control" name="shipping_methods" tableName="ORDER_INFO" columnName="SHIPPING_METHODS" defVal="P01">
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="name">第一联系人</label> <input type="text" class="form-control" name="contact_person1" value="李浩" placeholder="第一联系人" />
+				</div>
+				<div class="form-group">
+					<label for="name">联系电话</label> <input type="text" class="form-control" name="contact_phone1" value="18011420254"  placeholder="联系电话" />
+				</div>
+				<div class="form-group">
+					<label for="name">第二联系人</label> <input type="text" class="form-control" name="contact_person2" value="张淼"  placeholder="第二联系人" />
+				</div>
+				<div class="form-group">
+					<label for="name">联系电话</label> <input type="text" class="form-control" name="contact_phone2" value="18198750254"  placeholder="联系电话" />
+				</div>
+				
+			</div>
+			<div style="width: 420px; float: left; padding: 20px;">
+				<div class="form-group">
+					<label for="name">帐号交易类型</label> <select class="form-control" name="order_name" tableName="ORDER_INFO" columnName="EXCHANGE_TYPE" defVal="E0G">
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="name">发票类型</label> <select class="form-control" name="invoice_type" tableName="ORDER_INFO" columnName="INVOICE_TYPE" defVal="1">
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="name">发票抬头</label> <input type="text" class="form-control" name="invoice_title" value="云南管能科技" placeholder="发票抬头" />
+				</div>
+				<div class="form-group">
+					<label for="name">明细</label> <input type="text" class="form-control" name="invoice_detail" value="云南质检" placeholder="明细" />
+				</div>
+				<div class="form-group">
+					<label for="name">完成时间</label> <select class="form-control" name="time_limit" tableName="" columnName="">
+						<option value="0">--请选择--</option>
+						<option value="5" selected>5</option>
+						<option value="10">10</option>
+						<option value="15">15</option>
+					</select>工作日
+				</div>
+				<div class="form-group">
+					<label for="name">备注</label><input type="text" class="form-control" name="remark" placeholder="备注" value="请输入备注信息！！ " />
+				</div>
+				
+			</div>
+			<div style="clear: both"></div>
+			<div>
+				<button type="button" class="btn btn-primary btn-lg" id="save_order_btn" style="background-color: #49bfff; width: 120px; border: none; height: 40px; margin-left: 360px;">发布</button>
+			</div>
+		</div>
+	</form>
+	<!-- 生成订单 end -->
+	
+	<script src="${rc.contextPath}/js/generator/give_org_main.js?_${date.systemTime}"></script>
+
+</body>
+</html>
+<script>
+	$(function() {
+		$('#modal' + GetQueryString("date")).modal({
+			keyboard : true
+		})
+	});
+
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null)
+			return unescape(r[2]);
+		return null;
+	}
+</script>
+

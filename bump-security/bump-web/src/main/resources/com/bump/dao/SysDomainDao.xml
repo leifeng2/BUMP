@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bump.dao.SysDomainDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.bump.entity.SysDomainEntity" id="sysDomainMap">
+        <result property="id" column="id"/>
+        <result property="tableName" column="table_name"/>
+        <result property="columnName" column="column_name"/>
+        <result property="columnValue" column="column_value"/>
+        <result property="description" column="description"/>
+        <result property="sort" column="sort"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.bump.entity.SysDomainEntity">
+		select * from sys_domain where id = #{value}
+	</select>
+
+	<select id="findPageList" resultType="com.bump.entity.SysDomainEntity">
+		select * from sys_domain
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by table_name,column_name,column_value asc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+	<select id="findByTableNameAndColumnName" resultType="com.bump.entity.SysDomainEntity">
+		select * from sys_domain where status='1' and table_name = #{tableName} and column_name =#{columnName} order by sort desc
+	</select>	
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from sys_domain 
+	</select>
+	 
+	<insert id="save" parameterType="com.bump.entity.SysDomainEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_domain
+		(
+			`table_name`, 
+			`column_name`, 
+			`column_value`, 
+			`description`, 
+			`sort`, 
+			`status`
+		)
+		values
+		(
+			#{tableName}, 
+			#{columnName}, 
+			#{columnValue}, 
+			#{description}, 
+			#{sort}, 
+			#{status}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bump.entity.SysDomainEntity">
+		update sys_domain 
+		<set>
+			<if test="tableName != null">`table_name` = #{tableName}, </if>
+			<if test="columnName != null">`column_name` = #{columnName}, </if>
+			<if test="columnValue != null">`column_value` = #{columnValue}, </if>
+			<if test="description != null">`description` = #{description}, </if>
+			<if test="sort != null">`sort` = #{sort}, </if>
+			<if test="status != null">`status` = #{status}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from sys_domain where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from sys_domain where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

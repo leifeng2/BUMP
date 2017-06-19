@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bump.dao.OrderTaskDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.bump.entity.OrderTaskEntity" id="orderTaskMap">
+        <result property="taskId" column="task_id"/>
+        <result property="deviceId" column="device_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="detectMethod" column="detect_method"/>
+        <result property="taskLimt" column="task_limt"/>
+        <result property="state" column="state"/>
+        <result property="taskTime" column="task_time"/>
+        <result property="dealTime" column="deal_time"/>
+        <result property="orderId" column="order_id"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.bump.entity.OrderTaskEntity">
+		select * from order_task where task_id = #{value}
+	</select>
+
+	<select id="findPageList" resultType="com.bump.entity.OrderTaskEntity">
+		select * from order_task
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by task_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from order_task 
+	</select>
+	 
+	<insert id="save" parameterType="com.bump.entity.OrderTaskEntity" useGeneratedKeys="true" keyProperty="taskId">
+		insert into order_task
+		(
+			`device_id`, 
+			`user_id`, 
+			`detect_method`, 
+			`task_limt`, 
+			`state`, 
+			`task_time`, 
+			`deal_time`, 
+			`order_id`
+		)
+		values
+		(
+			#{deviceId}, 
+			#{userId}, 
+			#{detectMethod}, 
+			#{taskLimt}, 
+			#{state}, 
+			#{taskTime}, 
+			#{dealTime}, 
+			#{orderId}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bump.entity.OrderTaskEntity">
+		update order_task 
+		<set>
+			<if test="deviceId != null">`device_id` = #{deviceId}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="detectMethod != null">`detect_method` = #{detectMethod}, </if>
+			<if test="taskLimt != null">`task_limt` = #{taskLimt}, </if>
+			<if test="state != null">`state` = #{state}, </if>
+			<if test="taskTime != null">`task_time` = #{taskTime}, </if>
+			<if test="dealTime != null">`deal_time` = #{dealTime}, </if>
+			<if test="orderId != null">`order_id` = #{orderId}</if>
+		</set>
+		where task_id = #{taskId}
+	</update>
+	
+	<delete id="delete">
+		delete from order_task where task_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from order_task where task_id in 
+		<foreach item="taskId" collection="array" open="(" separator="," close=")">
+			#{taskId}
+		</foreach>
+	</delete>
+
+</mapper>

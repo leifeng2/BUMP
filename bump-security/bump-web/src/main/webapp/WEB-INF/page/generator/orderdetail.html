@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>订单明细</title>
+#parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+		<div class="grid-btn">
+			#if($shiro.hasPermission("orderdetail:save"))
+			<a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+			#end
+			#if($shiro.hasPermission("orderdetail:update"))
+			<a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			#end
+			#if($shiro.hasPermission("orderdetail:delete"))
+			<a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+			#end
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+    
+    <div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+											<div class="form-group">
+			   	<div class="col-sm-2 control-label">订单ID</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="orderDetail.orderId" placeholder="订单ID"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">设备ID</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="orderDetail.deviceId" placeholder="设备ID"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">检测方式（参见数据字典：检定、校准、检测、检验）</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="orderDetail.detectMethod" placeholder="检测方式（参见数据字典：检定、校准、检测、检验）"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">送检机构</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="orderDetail.sysOrgId" placeholder="送检机构"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">录入人员</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="orderDetail.userId" placeholder="录入人员"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">应收</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="orderDetail.shouldAmount" placeholder="应收"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">实收</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="orderDetail.realAmount" placeholder="实收"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">订单类型（参见数据字典 指派、竞价）</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="orderDetail.orderType" placeholder="订单类型（参见数据字典 指派、竞价）"/>
+			    </div>
+			</div>
+							<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="${rc.contextPath}/js/generator/orderdetail.js?_${date.systemTime}"></script>
+</body>
+</html>

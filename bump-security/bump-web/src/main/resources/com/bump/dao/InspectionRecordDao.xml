@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bump.dao.InspectionRecordDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.bump.entity.InspectionRecordEntity" id="inspectionRecordMap">
+        <result property="recordId" column="record_id"/>
+        <result property="recordType" column="record_type"/>
+        <result property="deviceId" column="device_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="inspectDate" column="inspect_date"/>
+        <result property="inspectResult" column="inspect_result"/>
+        <result property="remark" column="remark"/>
+        <result property="standName" column="stand_name"/>
+        <result property="deviceType" column="device_type"/>
+        <result property="measureRange" column="measure_range"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.bump.entity.InspectionRecordEntity">
+		select * from inspection_record where record_id = #{value}
+	</select>
+
+	<select id="findPageList" resultType="com.bump.entity.InspectionRecordEntity">
+		SELECT
+  t.*, sd.stand_name, sd.device_type, sd.measure_range
+   FROM
+  inspection_record t
+    LEFT JOIN standard_device sd ON (t.device_id = sd.stand_dev_id)
+    where 1=1
+    
+		<if test="queryKey != null and queryKey != null">
+			and t.record_id like CONCAT('%', #{queryKey}, '%') 
+		</if>
+		<if test="queryCDRQ != null and queryCDRQ != null and queryCDRQ=='01'">
+		   and t.inspect_date between date_sub(now(),interval 1 month) and now()
+		</if>
+		<if test="queryCDRQ != null and queryCDRQ != null and queryCDRQ=='02'">
+		   and t.inspect_date between date_sub(now(),interval 3 month) and now()
+		</if>
+		<if test="queryCDRQ != null and queryCDRQ != null and queryCDRQ=='03'">
+		   and t.inspect_date between date_sub(now(),interval 6 month) and now()
+		</if>
+		<if test="queryCDRQ != null and queryCDRQ != null and queryCDRQ=='04'">
+		   and t.inspect_date between date_sub(now(),interval 1 year) and now()
+		</if>
+		<if test="queryCDRQ != null and queryCDRQ != null and queryCDRQ=='05'">
+		   and t.inspect_date between date_sub(now(),interval 3 year) and now()
+		</if>
+		<if test="queryCCJG != null and queryCCJG != null and queryCCJG=='01'">
+		   and t.inspect_result=1
+		</if>
+		<if test="queryCCJG != null and queryCCJG != null and queryCCJG=='02'">
+		   and t.inspect_result=0
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by t.${sidx} ${order}
+            </when>
+			<otherwise>
+                order by record_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from inspection_record 
+	</select>
+	 
+	<insert id="save" parameterType="com.bump.entity.InspectionRecordEntity" useGeneratedKeys="true" keyProperty="recordId">
+		insert into inspection_record
+		(
+			`record_type`, 
+			`device_id`, 
+			`user_id`, 
+			`inspect_date`, 
+			`inspect_result`, 
+			`remark`, 
+			`record_detail`
+		)
+		values
+		(
+			#{recordType}, 
+			#{deviceId}, 
+			#{userId}, 
+			#{inspectDate}, 
+			#{inspectResult}, 
+			#{remark}, 
+			#{recordDetail}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bump.entity.InspectionRecordEntity">
+		update inspection_record 
+		<set>
+			<if test="recordType != null">`record_type` = #{recordType}, </if>
+			<if test="deviceId != null">`device_id` = #{deviceId}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="inspectDate != null">`inspect_date` = #{inspectDate}, </if>
+			<if test="inspectResult != null">`inspect_result` = #{inspectResult}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="recordDetail != null">`record_detail` = #{recordDetail}</if>
+		</set>
+		where record_id = #{recordId}
+	</update>
+	
+	<delete id="delete">
+		delete from inspection_record where record_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from inspection_record where record_id in 
+		<foreach item="recordId" collection="array" open="(" separator="," close=")">
+			#{recordId}
+		</foreach>
+	</delete>
+
+</mapper>
